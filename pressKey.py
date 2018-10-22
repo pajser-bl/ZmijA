@@ -1,13 +1,17 @@
 import keyboard
 
-def pressUp():
+
+def press_up():
     keyboard.press_and_release('up')
 
-def pressDown():
+
+def press_down():
     keyboard.press_and_release('down')
 
-def pressLeft():
+
+def press_left():
     keyboard.press_and_release('left')
 
-def pressRight():
+
+def press_right():
     keyboard.press_and_release('right')

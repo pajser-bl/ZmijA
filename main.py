@@ -1,24 +1,15 @@
-import startExe
 import gameMode
-import windowCatcher
-import time
-import pressKey
+import brain
 
-executable="Snake.exe"
-window_title="Parameters"
+executable = "Snake.exe"
+window_title = "Parameters"
+picture_path = "pic.png"
+
 
 def main():
-    startExe.startExe(executable)
-    time.sleep(1)
-    windowCatcher.maximize(window_title)
-    time.sleep(1)
-    gameMode.setFieldSize("19x19")
-    gameMode.setMoveInterval(200)
-    gameMode.startGame()
-    time.sleep(.10)
-    pressKey.pressLeft()
-    time.sleep(.200)
-    pressKey.pressDown()
+    gameMode.set_up_game("17x17", 500, executable, window_title)
+    brain.think_and_move("17x17", 500, picture_path)
+
 
 if __name__ == '__main__':
     main()
