@@ -1,9 +1,8 @@
-import pictureMatrix
-import screenGrab
+import picture_matrix
 
 
 class Node(object):
-    """cvor pamti svoje koordinate,roditelje(prethodni cvor),vrijednost heuristike"""
+    """cvor pamti svoje koordinate, roditelje(prethodni cvor), vrijednost heuristike"""
 
     def __init__(self, coordinates, parent, start_dot, goal_dot):
         self.coordinates = coordinates
@@ -36,16 +35,16 @@ def get_available_neighbours(node, start_dot, goal_dot, matrix):
     (x, y) = node.coordinates
     neighbours = []
     #  Nije van okvira matrice i nije rep
-    if pictureMatrix.field_exists((x - 1, y), matrix) and not pictureMatrix.is_tail((x - 1, y), matrix):
+    if picture_matrix.field_exists((x - 1, y), matrix) and not picture_matrix.is_tail((x - 1, y), matrix):
         t_node = Node((x - 1, y), node, start_dot, goal_dot)
         neighbours.append(t_node)
-    if pictureMatrix.field_exists((x, y - 1), matrix) and not pictureMatrix.is_tail((x, y - 1), matrix):
+    if picture_matrix.field_exists((x, y - 1), matrix) and not picture_matrix.is_tail((x, y - 1), matrix):
         t_node = Node((x, y - 1), node, start_dot, goal_dot)
         neighbours.append(t_node)
-    if pictureMatrix.field_exists((x + 1, y), matrix) and not pictureMatrix.is_tail((x + 1, y), matrix):
+    if picture_matrix.field_exists((x + 1, y), matrix) and not picture_matrix.is_tail((x + 1, y), matrix):
         t_node = Node((x + 1, y), node, start_dot, goal_dot)
         neighbours.append(t_node)
-    if pictureMatrix.field_exists((x, y + 1), matrix) and not pictureMatrix.is_tail((x, y + 1), matrix):
+    if picture_matrix.field_exists((x, y + 1), matrix) and not picture_matrix.is_tail((x, y + 1), matrix):
         t_node = Node((x, y + 1), node, start_dot, goal_dot)
         neighbours.append(t_node)
     return neighbours
@@ -54,10 +53,10 @@ def get_available_neighbours(node, start_dot, goal_dot, matrix):
 # https://en.wikipedia.org/wiki/A*_search_algorithm#Pseudocode
 # https://medium.com/@nicholas.w.swift/easy-a-star-pathfinding-7e6689c7f7b2
 def a_star(matrix):
-    start_dot = pictureMatrix.find_head(matrix)
-    print(start_dot)
-    goal_dot = pictureMatrix.find_apple(matrix)
-    print(goal_dot)
+    start_dot = picture_matrix.find_head(matrix)
+    print("start node: ", start_dot)
+    goal_dot = picture_matrix.find_apple(matrix)
+    print("goal node: ", goal_dot)
     # Initialize open and closed list
     closed_list = []
     opened_list = []
@@ -87,8 +86,9 @@ def a_star(matrix):
 
         # Append the neighbours
         neighbours = get_available_neighbours(current_node, start_dot, goal_dot, matrix)
-        #neighbours = sorted(neighbours, key=lambda node: node.value)
-        #neighbours = sorted(neighbours, key=lambda node: node.g)
+        # neighbours = sorted(neighbours, key=lambda node: node.value)
+        # neighbours = sorted(neighbours, key=lambda node: node.g)
+
         neighbours = sorted(neighbours, key=lambda node: node.h)
 
         # Loop through neighbours
@@ -105,34 +105,3 @@ def a_star(matrix):
             # This path is the best until now. Record it!
             path.append(current_node)
             break
-
-
-def get_path(field_size, image_path):
-    matrix = pictureMatrix.map_matrix(field_size, image_path)
-    print(matrix)
-    return a_star(matrix)
-
-
-def get_direction(first_node, second_node):
-    (old_x, old_y) = first_node.coordinates
-    (new_x, new_y) = second_node.coordinates
-    if old_x < new_x:
-        return "right"
-    if old_x > new_x:
-        return "left"
-    if old_y < new_y:
-        return "down"
-    if old_y > new_y:
-        return "up"
-
-
-def get_move_order(field_size, picture_path):
-    screenGrab.screen_grab(field_size)
-    path = get_path(field_size, picture_path)
-    print(path)
-    move_order = []
-    for i in range(0, len(path)-1):
-        direction = get_direction(path[i], path[i+1])
-        move_order.append(direction)
-    return move_order
-

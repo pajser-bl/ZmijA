@@ -31,7 +31,10 @@ def map_matrix(field_size, image_path):
                 matrix[j // 20][i // 20] = 2
             if pixels[i, j] == RED:
                 matrix[j // 20][i // 20] = 3
-    return matrix
+    if apple_exists(matrix) and head_exists(matrix):
+        return matrix
+    else:
+        return None
 
 
 def find_head(matrix):
@@ -62,3 +65,19 @@ def is_tail(dot, matrix):
         return 1
     else:
         return 0
+
+
+def apple_exists(matrix):
+    for i in range(len(matrix)):
+        for j in range(len(matrix)):
+            if matrix[j][i] == 3:
+                return True
+    return False
+
+
+def head_exists(matrix):
+    for i in range(len(matrix)):
+        for j in range(len(matrix)):
+            if matrix[j][i] == 3:
+                return True
+    return False
