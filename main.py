@@ -8,8 +8,8 @@ picture_path = "pic.png"
 
 def main():
 
-    game_mode.set_up_game("7x7", 1000, executable, window_title)
-    brain.think_and_move("7x7", 1000, picture_path)
+    game_mode.set_up_game("13x13", 400, executable, window_title)
+    brain.think_and_move("13x13", 400, picture_path)
 
 
 if __name__ == '__main__':
