@@ -1,7 +1,7 @@
 from PIL import ImageGrab
 
 #  Koordinata gornjeg lijevog ugla
-x_start = 57
+x_start = 58
 y_start = 80
 
 #  Duzina i sirina polja u pikselima
@@ -13,7 +13,7 @@ def screen_grab(size):
     return ImageGrab.grab(box)
 
 
-def save_screen_grab(size):
+def save_screen_grab(size, name):
     box = (x_start, y_start, x_start + size * _dim, y_start + size * _dim)
     image = ImageGrab.grab(box)
-    image.save('screen_shot.png', 'PNG')
+    image.save(name + '.png', 'PNG')

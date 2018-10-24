@@ -36,7 +36,7 @@ x_exit = 175
 y_exit = 65
 
 #  Pomjeraj X po jedinici polja
-_dim_exit = 40
+_dim_exit = 20
 
 
 def set_field_size(n):
@@ -104,4 +104,9 @@ def close_all(field_size):
 
 
 def close_game(field_size):
-    mouse_control.set_mouse_position(x_exit + _dim_exit * field_size, y_exit)
+    mouse_control.set_mouse_position(x_exit + _dim_exit * (field_size - 7), y_exit)
+    mouse_control.left_click()
+
+
+def get_foreground_window_title():
+    return win32gui.GetWindowText(win32gui.GetForegroundWindow())

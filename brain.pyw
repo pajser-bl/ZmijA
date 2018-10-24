@@ -10,7 +10,7 @@ def think_and_move(field_size, move_interval):
     time_to_wait = move_interval / 1000
     time_to_hurry = move_interval / 10000
     while 1:
-        move_order = get_move_order(get_field_int(field_size), time_to_wait - time_to_hurry)
+        move_order = get_move_order(get_field_int(field_size), time_to_wait)
         print(move_order)
         for direction in move_order:
             print(direction)
@@ -67,7 +67,6 @@ def get_path(field_size, time_to_wait):
     matrix = picture_matrix.map_matrix(field_size, time_to_wait)
     if matrix is None:
         return None
-    #print(matrix)
     return a_star.a_star(matrix)
 
 
@@ -80,7 +79,7 @@ def get_move_order(field_size, time_to_wait):
         if not path:
             print("Remapping failed. Stopping simulation.")
             print("Taking screen shot.")
-            screen_grab.save_screen_grab(field_size)
+            screen_grab.save_screen_grab(field_size, game_mode.get_foreground_window_title())
             print("Closing all windows.")
             game_mode.close_all(field_size)
     move_order = []
