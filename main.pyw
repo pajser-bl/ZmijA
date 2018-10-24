@@ -7,8 +7,8 @@ window_title = "Parameters"
 
 def main():
 
-    game_mode.set_up_game("19x19", 3000, executable, window_title)
-    brain.think_and_move("19x19", 3000)
+    game_mode.set_up_game("19x19", 700, executable, window_title)
+    brain.think_and_move("19x19", 700)
 
 
 if __name__ == '__main__':

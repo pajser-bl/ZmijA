@@ -19,21 +19,22 @@ RED = (255, 0, 0)  # jabuka 3
 def map_matrix(field_size, time_to_wait):
     time.sleep(time_to_wait)
     image = screen_grab.screen_grab(field_size)
-    pixels = image.load()
     matrix = [0] * field_size
     for i in range(field_size):
         matrix[i] = [0] * field_size
     for i in range(10, (field_size - 1) * 20 - 10, 20):
         for j in range(10, (field_size - 1) * 20 - 10, 20):
-            if pixels[i, j] == WHITE:
+            if image.getpixel((i, j)) == WHITE:
                 matrix[j // 20][i // 20] = 0
-            if pixels[i, j] == GREEN:
+            if image.getpixel((i, j)) == GREEN:
                 matrix[j // 20][i // 20] = 1
-            if pixels[i, j] == BLACK:
+            if image.getpixel((i, j)) == BLACK:
                 matrix[j // 20][i // 20] = 2
-            if pixels[i, j] == RED:
+            if image.getpixel((i, j)) == RED:
                 matrix[j // 20][i // 20] = 3
     if apple_exists(matrix) and head_exists(matrix):
+        for i in range(field_size):
+            print(matrix[i])
         return matrix
     else:
         return None

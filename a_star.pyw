@@ -73,8 +73,9 @@ def a_star(matrix):
     # Loop until the goal is reached
     while opened_list:
         # Get current node
-        # current_node = opened_list[0]
+
         current_node = opened_list.pop(0)
+        closed_list.append(current_node)
 
         # Check if goal is reached
         if current_node.coordinates == goal_dot:
@@ -82,25 +83,20 @@ def a_star(matrix):
             path.append(goal)
             return path
 
-        # opened_list.remove(current_node)
-        closed_list.append(current_node)
-
         # Append the neighbours
         neighbours = get_available_neighbours(current_node, start_dot, goal_dot, matrix)
-        # neighbours = sorted(neighbours, key=lambda node: node.value)
-        # neighbours = sorted(neighbours, key=lambda node: node.g)
-        neighbours = sorted(neighbours, key=lambda node: node.value)
+        # Sort the neighbours
         neighbours = sorted(neighbours, key=lambda node: node.h)
 
         # Loop through neighbours
         for neighbour in neighbours:
             if neighbour in closed_list:
-                    continue  # Ignore the neighbor which is already evaluated.
+                    continue  # Ignore the neighbor which is already evaluated.(Stay vigilant!)
 
             # Discover a new node
             if neighbour not in opened_list:
                 opened_list.append(neighbour)
-            if current_node.h < neighbour.h:
+            if current_node.h <= neighbour.h:
                 continue
 
             # This path is the best until now. Record it!

@@ -9,13 +9,15 @@ import game_mode
 def think_and_move(field_size, move_interval):
     time_to_wait = move_interval / 1000
     time_to_hurry = move_interval / 10000
+    wait(.10)
     while 1:
         move_order = get_move_order(get_field_int(field_size), time_to_wait)
         print(move_order)
+        # wait(.10)
         for direction in move_order:
             print(direction)
             move(direction)
-            wait(time_to_wait - time_to_hurry)
+            wait(time_to_wait-time_to_hurry)
 
 
 def wait(time_to_wait):
@@ -71,17 +73,22 @@ def get_path(field_size, time_to_wait):
 
 
 def get_move_order(field_size, time_to_wait):
-    path = get_path(field_size, time_to_wait)
-    if not path:
+    time_to_hurry = time_to_wait / 10000
+    path = get_path(field_size, time_to_wait + time_to_hurry)
+    i = 0
+    while not path and i < 5:
         print("Matrix is bad, trying to remap...")
+        print("Try ", i)
         time.sleep(.100)
-        path = get_path(field_size, time_to_wait)
-        if not path:
-            print("Remapping failed. Stopping simulation.")
-            print("Taking screen shot.")
-            screen_grab.save_screen_grab(field_size, game_mode.get_foreground_window_title())
-            print("Closing all windows.")
-            game_mode.close_all(field_size)
+        path = get_path(field_size, .100)
+        i += 1
+    if not path:
+        print("Remapping failed. Stopping simulation.")
+        print("Taking screen shot.")
+        wait(field_size * time_to_wait)
+        screen_grab.save_screen_grab(field_size, time_to_wait)
+        print("Closing all windows.")
+        game_mode.close_all(field_size)
     move_order = []
     for i in range(0, len(path)-1):
         direction = get_direction(path[i], path[i+1])
