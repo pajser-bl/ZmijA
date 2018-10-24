@@ -73,7 +73,8 @@ def a_star(matrix):
     # Loop until the goal is reached
     while opened_list:
         # Get current node
-        current_node = opened_list[0]
+        #current_node = opened_list[0]
+        current_node = opened_list.pop(0)
 
         # Check if goal is reached
         if current_node.coordinates == goal_dot:
@@ -81,7 +82,7 @@ def a_star(matrix):
             path.append(goal)
             return path
 
-        opened_list.remove(current_node)
+        #opened_list.remove(current_node)
         closed_list.append(current_node)
 
         # Append the neighbours

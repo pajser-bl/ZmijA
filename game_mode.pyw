@@ -60,30 +60,11 @@ def set_field_size(n):
     mouse_control.left_click()
 
 
-def set_move_interval(i):
+def set_move_interval(move_interval):
     mouse_control.set_mouse_position(x_chose_interval, y_chose_interval)
     mouse_control.left_click()
     time.sleep(.500)
-    if i == 100:
-        mouse_control.set_mouse_position(x_interval_first_choice, y_interval_first_choice)
-    if i == 200:
-        mouse_control.set_mouse_position(x_interval_first_choice, y_interval_first_choice + _dim * 1)
-    if i == 300:
-        mouse_control.set_mouse_position(x_interval_first_choice, y_interval_first_choice + _dim * 2)
-    if i == 400:
-        mouse_control.set_mouse_position(x_interval_first_choice, y_interval_first_choice + _dim * 3)
-    if i == 500:
-        mouse_control.set_mouse_position(x_interval_first_choice, y_interval_first_choice + _dim * 4)
-    if i == 600:
-        mouse_control.set_mouse_position(x_interval_first_choice, y_interval_first_choice + _dim * 5)
-    if i == 700:
-        mouse_control.set_mouse_position(x_interval_first_choice, y_interval_first_choice + _dim * 6)
-    if i == 800:
-        mouse_control.set_mouse_position(x_interval_first_choice, y_interval_first_choice + _dim * 7)
-    if i == 900:
-        mouse_control.set_mouse_position(x_interval_first_choice, y_interval_first_choice + _dim * 8)
-    if i == 1000:
-        mouse_control.set_mouse_position(x_interval_first_choice, y_interval_first_choice + _dim * 9)
+    mouse_control.set_mouse_position(x_interval_first_choice, y_interval_first_choice + _dim*(move_interval // 100 - 1))
     mouse_control.left_click()
 
 

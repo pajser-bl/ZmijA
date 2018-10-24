@@ -1,8 +1,9 @@
-from PIL import Image
+import screen_grab
+import time
 
 # koordinata gornjeg lijevog ugla
-x_start = 58
-y_start = 81
+x_start = 57
+y_start = 80
 
 # sirina i duzina polja u pikselima
 _dim = 20
@@ -15,8 +16,9 @@ RED = (255, 0, 0)  # jabuka 3
 
 
 #  Funkcija vraca matricu popunjenu brojevima
-def map_matrix(field_size, image_path):
-    image = Image.open(image_path)
+def map_matrix(field_size, time_to_wait):
+    time.sleep(time_to_wait)
+    image = screen_grab.screen_grab(field_size)
     pixels = image.load()
     matrix = [0] * field_size
     for i in range(field_size):
@@ -78,6 +80,6 @@ def apple_exists(matrix):
 def head_exists(matrix):
     for i in range(len(matrix)):
         for j in range(len(matrix)):
-            if matrix[j][i] == 3:
+            if matrix[j][i] == 1:
                 return True
     return False
