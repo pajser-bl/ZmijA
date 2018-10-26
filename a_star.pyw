@@ -63,13 +63,11 @@ def a_star(matrix):
     closed_list = []
     opened_list = []
 
-    # For each node, which node it can most efficiently be reached from.
-    # If a node can be reached from many nodes, cameFrom will eventually contain the
-    # most efficient previous step
-
     # Put the start node
     start = Node(start_dot, None, start_dot, goal_dot)
     opened_list.append(start)
+
+    # Initialize path
     path = []
 
     # Loop until the goal is reached
