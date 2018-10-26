@@ -6,7 +6,7 @@ window_title = "Parameters"
 
 
 def main():
-    setup_and_start("9x9", 1100)
+    setup_and_start("11x11", 1100)
 
 
 def setup_and_start(field_size, move_interval):
