@@ -10,17 +10,17 @@ def think_and_move(field_size, move_interval):
     time_to_wait = move_interval / 1000
     time.sleep(time_to_wait)
     while 1:
-        if game_mode.get_foreground_window_title() != "Snake":
-            print("Game Over")
-            screen_shot_name = str(field_size) + 'x' + str(field_size) + '_' + str(int(time_to_wait)) + '-'
-            screen_shot_name += game_mode.get_snake_score() + '-ZF'
-            screen_grab.save_screen_grab(get_field_int(field_size), screen_shot_name)
-            print("Taking screen shot.")
-            print("Closing all windows.")
-            game_mode.close_all(field_size)
         move_order = get_move_order(get_field_int(field_size), time_to_wait)
         print(move_order)
         for direction in move_order:
+            if game_mode.get_foreground_window_title() != "Snake":
+                print("Game Over")
+                screen_shot_name = field_size + '_' + str(move_interval) + '-'
+                screen_shot_name += game_mode.get_snake_score() + '-ZF'
+                screen_grab.save_screen_grab(get_field_int(field_size), screen_shot_name)
+                print("Taking screen shot.")
+                print("Closing all windows.")
+                game_mode.close_all(get_field_int(field_size))
             print(direction)
             move(direction)
             time.sleep(time_to_wait)
