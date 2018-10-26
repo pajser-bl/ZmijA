@@ -6,9 +6,12 @@ window_title = "Parameters"
 
 
 def main():
+    setup_and_start("17x17", 400)
 
-    game_mode.set_up_game("13x13", 1500, executable, window_title)
-    brain.think_and_move("13x13", 1500)
+
+def setup_and_start(field_size ,move_interval):
+    game_mode.set_up_game(field_size, move_interval, executable, window_title)
+    brain.think_and_move(field_size, move_interval)
 
 
 if __name__ == '__main__':

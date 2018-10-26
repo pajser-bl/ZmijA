@@ -114,3 +114,4 @@ def get_foreground_window_title():
 
 def get_snake_score():
     return get_foreground_window_title().replace("ML: ", "")
+

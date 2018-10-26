@@ -76,6 +76,7 @@ def a_star(matrix):
     while opened_list:
         # Get current node
 
+        opened_list = sorted(opened_list, key=lambda node: node.value)
         current_node = opened_list.pop(0)
         closed_list.append(current_node)
 
