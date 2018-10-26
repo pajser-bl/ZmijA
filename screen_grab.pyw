@@ -20,10 +20,10 @@ def screen_grab(size):
     return ImageGrab.grab(box)
 
 
-def save_screen_grab(size, time):
+def save_screen_grab(size, name):
     box = (x_window_start, y_window_start, x_window_start + size * _dim, y_window_start + _pad + size * _dim)
     image = ImageGrab.grab(box)
-    image.save(str(size) + 'x' + str(size) + '_' + str(time*1000) + '.png', 'PNG')
+    image.save(name + '.png', 'PNG')
 
 
 def main():

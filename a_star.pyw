@@ -47,6 +47,8 @@ def get_available_neighbours(node, start_dot, goal_dot, matrix):
     if picture_matrix.field_exists((x, y + 1), matrix) and not picture_matrix.is_tail((x, y + 1), matrix):
         t_node = Node((x, y + 1), node, start_dot, goal_dot)
         neighbours.append(t_node)
+    if node.parent:
+        neighbours.remove(node.parent)
     return neighbours
 
 

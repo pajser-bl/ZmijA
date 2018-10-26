@@ -8,20 +8,14 @@ import game_mode
 
 def think_and_move(field_size, move_interval):
     time_to_wait = move_interval / 1000
-    time_to_hurry = move_interval / 10000
-    wait(.10)
+    time.sleep(time_to_wait)
     while 1:
         move_order = get_move_order(get_field_int(field_size), time_to_wait)
         print(move_order)
-        # wait(.10)
         for direction in move_order:
             print(direction)
             move(direction)
-            wait(time_to_wait-time_to_hurry)
-
-
-def wait(time_to_wait):
-    time.sleep(time_to_wait)
+            time.sleep(time_to_wait)
 
 
 def move(direction):
@@ -65,28 +59,31 @@ def get_field_int(field_size):
         return 19
 
 
-def get_path(field_size, time_to_wait):
-    matrix = picture_matrix.map_matrix(field_size, time_to_wait)
+def get_path(field_size):
+    matrix = picture_matrix.map_matrix(field_size)
     if matrix is None:
         return None
     return a_star.a_star(matrix)
 
 
 def get_move_order(field_size, time_to_wait):
-    time_to_hurry = time_to_wait / 10000
-    path = get_path(field_size, time_to_wait + time_to_hurry)
+    path = get_path(field_size)
     i = 0
     while not path and i < 5:
         print("Matrix is bad, trying to remap...")
         print("Try ", i)
-        time.sleep(.100)
-        path = get_path(field_size, .100)
+        time.sleep(time_to_wait)
+        path = get_path(field_size)
         i += 1
     if not path:
         print("Remapping failed. Stopping simulation.")
         print("Taking screen shot.")
-        wait(field_size * time_to_wait)
-        screen_grab.save_screen_grab(field_size, time_to_wait)
+        time.sleep(time_to_wait * 2)
+        screen_shot_name = str(field_size) + 'x' + str(field_size)
+        screen_shot_name += '_' + str(int(time_to_wait*1000))
+        screen_shot_name += '-' + game_mode.get_snake_score()
+        screen_shot_name += '-MF'
+        screen_grab.save_screen_grab(field_size, screen_shot_name)
         print("Closing all windows.")
         game_mode.close_all(field_size)
     move_order = []

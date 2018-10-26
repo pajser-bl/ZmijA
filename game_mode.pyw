@@ -109,4 +109,8 @@ def close_game(field_size):
 
 
 def get_foreground_window_title():
-    return win32gui.GetWindowText(win32gui.GetForegroundWindow())
+    return str(win32gui.GetWindowText(win32gui.GetForegroundWindow()))
+
+
+def get_snake_score():
+    return get_foreground_window_title().replace("ML: ", "")

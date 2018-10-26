@@ -1,5 +1,4 @@
 import screen_grab
-import time
 
 # koordinata gornjeg lijevog ugla
 x_start = 57
@@ -16,8 +15,7 @@ RED = (255, 0, 0)  # jabuka 3
 
 
 #  Funkcija vraca matricu popunjenu brojevima
-def map_matrix(field_size, time_to_wait):
-    time.sleep(time_to_wait)
+def map_matrix(field_size):
     image = screen_grab.screen_grab(field_size)
     matrix = [0] * field_size
     for i in range(field_size):
